@@ -1,0 +1,123 @@
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.project {
+    width: 100%;
+    display: grid;
+    grid-template-columns: .25fr .45fr .30fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "title summary picture";
+    margin-top: 10px;
+    background-color: var(--alt-bg-color);
+    padding: 20px;
+    border: solid 3px var(--image-border-color);
+}
+
+.project-summary {
+    grid-area: summary;
+}
+
+.project .project-title {
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project .project-title img {
+    width: 60%;
+    height: auto;
+}
+
+.project:nth-child(odd) > .project-image-holder {
+    grid-area: picture;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.project-image-holder > img {
+    border-radius: 10% 50% 90% 10% / 30% 30% 70% 30%;
+    width: 80%;
+    min-width: 200px;
+    height: auto;
+    transition: all 200ms ease;
+}
+
+
+.project:nth-child(even) > .project-image-holder {
+    grid-area: picture;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.project:nth-child(even) .project-image-holder > img {
+    border-radius: 50% 10% 10% 90% / 30% 30% 30% 70%;
+    width: 80%;
+    min-width: 200px;
+    height: auto;
+    transition: all 200ms ease;
+}
+
+.project-image-holder > img {
+    border: solid 3px #A72608;
+}
+
+.project-image-holder > img:hover, .project:nth-child(even) .project-image-holder > img:hover {
+    border-radius: 10%;
+    transform: scale(1.75);
+}
+
+.project:nth-child(odd) {
+    border-radius: 10% 50% 50% 10% / 30% 30% 70% 30%;
+}
+
+.project:nth-child(even) {
+    text-align: right;
+    grid-template-columns: .30fr .45fr .25fr;
+    grid-template-areas: 
+        "picture summary title";
+    border-radius: 50% 10% 10% 50% / 30% 30% 30% 70%;
+}
+
+.project h2 { 
+    text-align: center;
+    color: #A72608;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .project {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .project:nth-child(even) {
+        border-radius: 50px;
+    }
+    .project:nth-child(odd) {
+        border-radius: 50px;
+    }
+
+    .project-image-holder:nth-child(odd) > img {
+        min-width: 100px;
+    }
+    .project-image-holder:nth-child(even) > img {
+        min-width: 100px;
+    }
+    .project-image-holder > img:hover, .project:nth-child(even) .project-image-holder > img:hover {
+        border-radius: 10%;
+        transform: scale(1);
+    }
+}
