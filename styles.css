@@ -1,0 +1,96 @@
+/* 
+Colors:
+#E6EED6 Beige
+#DDE2C6 Beige (slightly darker)
+#BBC5AA Laurel Green
+#A72608 Rufous (Bright Red)
+#090C02 Smoky Black
+*/
+:root {
+    --main-bg-color: #BBC5AA; 
+    --image-border-color: #A72608;
+    --main-text-color: #090C02;
+}
+
+html {
+    color: var(--main-text-color);
+    min-height: 100vh;
+    background-color: var(--main-bg-color);
+}
+body {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 8px 16px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 75px 1fr 100px;
+    grid-template-areas: 
+        "header header header"
+        "sidebarL main sidebarR"
+        "footer footer footer";
+}
+header { 
+    display: flex;
+    justify-content: space-around;
+    grid-area: header;
+} 
+header img {
+    max-height: 100%;
+    transition: all 200ms ease;
+    /* border: solid 3px var(--image-border-color);
+    border-radius: 60% 40% 50% 70% / 80% 70% 70% 50%; */
+}
+
+header img:hover {
+    filter: drop-shadow(4px 4px 2px rgba(0,0,0,.3));
+    transform: translateY(-2px);
+}
+
+header > nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+}
+
+header > nav > a {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--image-border-color);
+    border: solid 3px var(--image-border-color);
+    border-radius: 40% 80% 90% 40% / 40% 40% 90% 90%;
+    color: white;
+    text-decoration: none;
+    will-change: transform, background-color, color, box-shadow;
+}
+
+header > nav > a:hover {
+    color: var(--image-border-color);
+    background-color: white;
+    transform: translateY(-1px);
+    box-shadow: 12px 7px 1px rgba(0,0,0,.3);
+}
+
+
+main {
+    grid-area: main;
+}
+
+main img {
+    width: 500px;    
+}
+
+.border-image {
+    border: solid 3px #A72608;
+    border-radius: 60% 40% 50% 70% / 80% 70% 70% 50%;
+    transition: all 200ms ease;
+    will-change: border-radius;
+}
+
+.border-image:hover {
+    border-radius: 20%;
+}
