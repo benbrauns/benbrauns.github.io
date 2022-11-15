@@ -104,7 +104,6 @@ main > #banner #social-links {
 
 main > #banner .social-link-image {
     width: 30px;
-
 }
 
 main {
@@ -146,3 +145,49 @@ main img {
         font-size: .8rem;
     }
 }   
+
+@media only screen and (max-width: 450px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 75px 1fr 100px;
+        grid-template-areas: 
+            "header"
+            "main"
+            "footer";
+    }
+
+    header {
+        align-items: center;
+    }
+    
+    
+    header > a > img {
+        width: 100px;
+    }
+
+    header > nav {
+        width: 200px;
+    }
+
+    header > nav > a {
+        width: 60px;
+        height: 30px;
+        font-size: .8rem;
+    }
+
+    main > #banner {
+        height: 175px;
+        width: 100%;
+    }
+
+    main > #banner img {
+        width: 80%;
+    }
+
+    main > #banner #social-links {
+        margin-top: 10px;
+        width: 150px;
+    }
+
+
+}
