@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createBoard();
     addButtonListeners();
     addKeyboardListeners();
+    loadGame();
     //callDB();
 });
 
@@ -19,7 +20,6 @@ function createBoard() {
     for (let i = 0; i < 6; i++) {
         board.prepend(template.content.cloneNode(true).children[0]);
     }
-    addCurrentLetter();
 }
 
 function addCurrentLetter() {
@@ -56,14 +56,41 @@ function enterClicked() {
     }
 }
 
-function guessWord(word) {
+async function loadGame() {
+    const token = await getAuthToken();
+    fetch('http://localhost:8080/game', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'Application/json',
+            'Authorization': "Bearer " + token
+        }
+    }).then((response) => {
+        return response.json();
+    }).then((game) => {
+        const guesses = game.guesses;
+        const rows = document.getElementById("board").children;
+        for (let i = 0; i < guesses.length; i++) {
+            let letters = guesses[i].letters;
+            for (let j = 0; j < letters.length; j++) {
+                rows[i].children[j].innerText = letters[j].letter;
+                rows[i].children[j].classList.add(letters[j].result);
+            }
+        }
+        currentRow = guesses.length;
+        addCurrentLetter();
+        document.getElementById("board").style.display = 'flex';
+    });
+}
+
+async function getAuthToken() {
     const headers = new Headers();
     headers.append('Content-Type', 'Application/json');
     const login = {
         username: 'a',
         password: 'a'
     }
-    const response = fetch('http://localhost:8080/login', {
+    const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
         mode: 'cors',
         headers: headers,
@@ -73,67 +100,66 @@ function guessWord(word) {
         return response.json()
     })
     .then((auth) => {
-        
         return auth.token;
     })
-    .then((token) => {
-        const guess = {
-            guessNumber: currentRow + 1,
-            letters: [
-                {
-                    position: 0,
-                    letter: word.charAt(0),
-                    result: '',
-                },
-                {
-                    position: 1,
-                    letter: word.charAt(1),
-                    result: '',
-                },
-                {
-                    position: 2,
-                    letter: word.charAt(2),
-                    result: '',
-                },
-                {
-                    position: 3,
-                    letter: word.charAt(3),
-                    result: '',
-                },
-                {
-                    position: 4,
-                    letter: word.charAt(4),
-                    result: '',
-                }
-            ]
-        };
-        // let guessHeaders = new Headers();
-        // guessHeaders.append('Content-Type', 'Application/json');
-        // guessHeaders.append('Authorization', "Bearer " + token)
-        let guessHeaders = {
-            'Content-Type': 'Application/json',
-            'Authorization': "Bearer " + token
-        };
-        fetch('http://localhost:8080/game/guess', {
-            method: 'POST',
-            mode: 'cors',
-            headers: guessHeaders,
-            body: JSON.stringify(guess),
-        })
-        .then((out) => {
-            return out.json();
-        })
-        .then((guessResult) => {
-            let letters = guessResult.letters;
-            let row = document.getElementById("board").children[currentRow]
-            for (let i = 0; i < letters.length; i++) {
-                row.children[i].classList.add(letters[i].result)
+    return response;
+}
+
+async function guessWord(word) {
+    const token = await getAuthToken();
+    const guess = {
+        guessNumber: currentRow + 1,
+        letters: [
+            {
+                position: 0,
+                letter: word.charAt(0),
+                result: '',
+            },
+            {
+                position: 1,
+                letter: word.charAt(1),
+                result: '',
+            },
+            {
+                position: 2,
+                letter: word.charAt(2),
+                result: '',
+            },
+            {
+                position: 3,
+                letter: word.charAt(3),
+                result: '',
+            },
+            {
+                position: 4,
+                letter: word.charAt(4),
+                result: '',
             }
-        }).then(() => {
-            currentRow++;
-            currentCol = 0;
-            addCurrentLetter();
-        });
+        ]
+    };
+    let guessHeaders = {
+        'Content-Type': 'Application/json',
+        'Authorization': "Bearer " + token
+    };
+    fetch('http://localhost:8080/game/guess', {
+        method: 'POST',
+        mode: 'cors',
+        headers: guessHeaders,
+        body: JSON.stringify(guess),
+    })
+    .then((out) => {
+        return out.json();
+    })
+    .then((guessResult) => {
+        let letters = guessResult.letters;
+        let row = document.getElementById("board").children[currentRow]
+        for (let i = 0; i < letters.length; i++) {
+            row.children[i].classList.add(letters[i].result)
+        }
+    }).then(() => {
+        currentRow++;
+        currentCol = 0;
+        addCurrentLetter();
     });
 }
 
@@ -182,27 +208,6 @@ function addButtonListeners() {
     });
 
 
-}
-
-async function callDB() {
-    const headers = new Headers();
-    headers.append('Content-Type', 'Application/json');
-    const login = {
-        username: 'a',
-        password: 'a'
-    }
-    const response = fetch('http://localhost:8080/login', {
-        method: 'POST',
-        mode: 'cors',
-        headers: headers,
-        body: JSON.stringify(login),
-    })
-    .then((response) => {
-        return response.json()
-    })
-    .then((auth) => {
-        console.log(auth.token);
-    });
 }
 
 function endGame() {

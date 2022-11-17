@@ -17,7 +17,7 @@ main {
 
 #board {
     grid-area: board;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
 }
