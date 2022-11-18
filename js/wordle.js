@@ -103,7 +103,14 @@ async function checkForUser() {
             return response.json();
         });
         window.localStorage.setItem('pWordle', response);
+    } else {
+        let test = await getAuthToken();
+        if (test == "") {
+            localStorage.removeItem('pWordle');
+            await checkForUser();
+        } 
     }
+    
 }
 
 async function getAuthToken() {
@@ -122,11 +129,17 @@ async function getAuthToken() {
         body: JSON.stringify(login),
     })
     .then((response) => {
-        return response.json()
+        if (response.status !== 200) {
+            return {
+                "token": ""
+            }
+        } else {
+            return response.json();
+        }
     })
     .then((auth) => {
         return auth.token;
-    })
+    });
     return response;
 }
 
