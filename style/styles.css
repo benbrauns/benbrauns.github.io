@@ -16,7 +16,6 @@ Colors:
 
 html {
     color: var(--main-text-color);
-    min-height: 100vh;
     background-color: var(--main-bg-color);
 }
 body {

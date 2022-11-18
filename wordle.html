@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='viewport' content='initial-scale=1, viewport-fit=cover'>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="style/wordle.css">
     <title>Wordle</title>
 </head>
 <body>
-    <script>
+    <!-- <script>
         window.onresize = function() {
-            document.body.height = window.innerHeight;
+            document.body.height = window.innerHeight - document.getElementById("header").height;
         }
-    </script>
+    </script> -->
     <script src="js/wordle.js"></script>
-    <header>
+    <header id="header">
         <a href="index.html">
             <img src="images/logo.png">
         </a>

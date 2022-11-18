@@ -1,0 +1,9 @@
+html {
+    background-color: green;
+    
+}
+
+body {
+    margin-bottom: env(safe-area-inset-bottom);
+    background-color: darkgrey;
+}

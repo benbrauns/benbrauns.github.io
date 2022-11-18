@@ -96,26 +96,33 @@ main {
 }
 
 @media only screen and (max-width: 450px) {
+    main {
+        /* row-gap: 20px; */
+    }
+
     body {
+        max-height: 100vh;
         grid-template-columns: 1fr ;
         grid-template-rows: 75px 1fr;
         grid-template-areas: 
             "header"
             "main";
+        padding-bottom: env(safe-area-inset-bottom);
     }
 
     .board-row{ 
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .board-letter {
         margin:0px;
-        width: 18vw;
-        height: 18vw;
+        width: 17vw;
+        height: 17vw;
     }
 
     #keyboard {
-        /* margin-bottom: 5vh; */
+        margin-bottom: 125px;
+        touch-action: manipulation;
     }
 
     .keyboard-row {
