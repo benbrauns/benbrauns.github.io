@@ -58,7 +58,7 @@ function enterClicked() {
 
 async function loadGame() {
     const token = await getAuthToken();
-    fetch('http://localhost:8080/game', {
+    fetch('https://wordle.herokuapp.com/game', {
         method: 'GET',
         mode: 'cors',
         headers: {
@@ -90,7 +90,7 @@ async function getAuthToken() {
         username: 'a',
         password: 'a'
     }
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('https://wordle.herokuapp.com/login', {
         method: 'POST',
         mode: 'cors',
         headers: headers,
@@ -141,7 +141,7 @@ async function guessWord(word) {
         'Content-Type': 'Application/json',
         'Authorization': "Bearer " + token
     };
-    fetch('http://localhost:8080/game/guess', {
+    fetch('https://wordle.herokuapp.com/game/guess', {
         method: 'POST',
         mode: 'cors',
         headers: guessHeaders,
