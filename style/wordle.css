@@ -94,3 +94,39 @@ main {
 .keyboard-key-special {
     width: 60px;
 }
+
+@media only screen and (max-width: 450px) {
+    body {
+        grid-template-columns: 1fr ;
+        grid-template-rows: 75px 1fr;
+        grid-template-areas: 
+            "header"
+            "main";
+    }
+
+    .board-row{ 
+        justify-content: space-between;
+    }
+
+    .board-letter {
+        margin:0px;
+        width: 18vw;
+        height: 18vw;
+    }
+
+    .keyboard-row {
+        width: 100%;
+    }
+
+    .keyboard-key {
+        margin: 1px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        width: 32px;
+        height: 50px;
+    }
+
+    .keyboard-key-special {
+        width: 45px;
+    }
+}
