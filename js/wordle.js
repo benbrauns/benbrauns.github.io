@@ -87,8 +87,7 @@ async function loadGame() {
 async function getAuthToken() {
     const headers = {
         "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'Application/json',
-        'Authorization': "Bearer " + token
+        'Content-Type': 'Application/json'
     }
     const login = {
         username: 'a',
