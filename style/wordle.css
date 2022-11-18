@@ -114,6 +114,10 @@ main {
         height: 18vw;
     }
 
+    #keyboard {
+        /* margin-bottom: 5vh; */
+    }
+
     .keyboard-row {
         width: 100%;
     }
