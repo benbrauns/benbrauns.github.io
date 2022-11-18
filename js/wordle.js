@@ -60,7 +60,6 @@ async function loadGame() {
     const token = await getAuthToken();
     fetch('https://wordle.herokuapp.com/game', {
         method: 'GET',
-        mode: 'cors',
         headers: {
             "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": true,
             'Content-Type': 'Application/json',
